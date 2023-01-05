@@ -1,15 +1,16 @@
 from fastapi import APIRouter
 from config.db import conn
 from schemas.user import userEntity, usersEntity
+from models.user import User
 
 user = APIRouter()
 
 @user.get('/users')
 def find_all_users():
-    return "hello world"
+    return usersEntity(conn.local.user.find())
 
 @user.post('/users')
-def create_user():
+def create_user(user:User):
     return "hello world"
 
 @user.get('/users/{id}')
